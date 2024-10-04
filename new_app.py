@@ -54,8 +54,11 @@ driver.execute_script("window.scrollTo(0, 5000);")
 time.sleep(2)
 item_no = 25
 scroll_change = 6080
-while True:
 
+# when the old height is equal to new height , the loop will end
+while old_height != new_height:
+
+    # you can increase the time sleep seconds if the page takes time to load 
     try:
         time.sleep(.5)
         old_height = driver.execute_script('return document.body.scrollHeight')
@@ -70,6 +73,8 @@ while True:
         scroll_change += 1200
 
         print('Extracted ',item_no,' Items')
+
+        new_height = driver.execute_script('return document.body.scrollHeight')
 
     except:
         print('-'*50)
@@ -86,7 +91,7 @@ print('New Height ',new_height)
 
 html = driver.page_source
 
-with open('new_steam.html','w',encoding='utf-8' ) as file:
+with open('test_steam.html','w',encoding='utf-8' ) as file:
     file.write(html)
 
 time.sleep(10)
